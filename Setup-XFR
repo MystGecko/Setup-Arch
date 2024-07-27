@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Créer et modifier le fichier de configuration Xorg
+sudo mkdir -p /etc/X11/xorg.conf.d/
+sudo nano /etc/X11/xorg.conf.d/00-keyboard.conf
+
+# Ajouter la configuration du clavier AZERTY
+# (copiez et collez le bloc de texte suivant dans l'éditeur nano)
+Section "InputClass"
+    Identifier "system-keyboard"
+    MatchIsKeyboard "on"
+    Option "XkbLayout" "fr"
+    Option "XkbVariant" "latin9"
+EndSection
+
+# Créer et modifier le fichier de configuration XFCE4
+sudo mkdir -p /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/
+sudo nano /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/keyboard-layout.xml
+
+# Ajouter la configuration du clavier AZERTY
+# (copiez et collez le bloc de texte suivant dans l'éditeur nano)
+<?xml version="1.0" encoding="UTF-8"?>
+<channel name="keyboard-layout" version="1.0">
+  <property name="Default" type="empty">
+    <property name="XkbLayout" type="string" value="fr"/>
+    <property name="XkbVariant" type="string" value="latin9"/>
+  </property>
+</channel>
+
+# Appliquer immédiatement les changements pour le clavier
+setxkbmap fr
